@@ -1,9 +1,10 @@
 package net.htlgkr.pos2.eratosthenesPrimeSieve;
 
+import java.sql.Array;
+
 public class EratosthenesPrimeSieve implements PrimeSieve{
 
-    private int N;
-    boolean[] primes;
+    private boolean[] primes = new boolean[N];
 
 
     @Override
@@ -12,10 +13,24 @@ public class EratosthenesPrimeSieve implements PrimeSieve{
     }
 
     public EratosthenesPrimeSieve(int N) {
-        this.N = N;
-        for (int i = 2; i < N+1; i++) {
+
+        for (int i = 2; i <= N; i++) {
             primes[i] = true;
         }
+
+        for (int i = 2; i <= Math.sqrt(N); i++) {
+
+            if (primes[i]){
+
+                for (int j = i*i; j <= N; j+=i) {
+
+                    primes[j] = false;
+
+                }
+            }
+        }
+
+
     }
 
     @Override
