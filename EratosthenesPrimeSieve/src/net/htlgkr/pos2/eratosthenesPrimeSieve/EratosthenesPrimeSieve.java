@@ -6,29 +6,16 @@ public class EratosthenesPrimeSieve implements PrimeSieve{
 
     private boolean[] primes;
 
-
-
-
     public EratosthenesPrimeSieve(int N)
     {
 
-        primes = new boolean[N];
+        primes = new boolean[N+1];
 
-        for (int i = 2; i <= N; i++) {
-            primes[i] = true;
-        }
+        for (int i = 2; i <= N; i++) primes[i] = true;
 
-        for (int i = 2; i <= Math.sqrt(N); i++) {
 
-            if (primes[i]){
+        for (int i = 2; i <= Math.sqrt(N); i++) if (primes[i]) for (int j = i*i; j <= N; j+=i) primes[j] = false;
 
-                for (int j = i*i; j <= N; j+=i) {
-
-                    primes[j] = false;
-
-                }
-            }
-        }
 
 
     }
@@ -41,8 +28,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve{
 
     @Override
     public void printPrimes() {
-        for (int i = 0; i < primes.length; i++) {
-            if (primes[i]) System.out.println(primes[i] + " ");
-        }
+        for (int i = 2; i < primes.length; i++) if (primes[i]) System.out.println(primes[i] + " ");
+
     }
 }
